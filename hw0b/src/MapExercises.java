@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.In;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +21,8 @@ public class MapExercises {
      */
     public static Map<Integer, Integer> squares(List<Integer> nums) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        int sz = nums.size();
-        for (int i = 0; i < sz; ++i){
-            map.put(i, (int) Math.pow(i, 2));
+        for (Integer i : nums){
+            map.put(i, i * i);
         }
         return map;
     }
@@ -33,5 +34,9 @@ public class MapExercises {
             map.put(word, map.getOrDefault(word, 0) + 1);
         }
         return map;
+    }
+
+    public static void main(String[] args) {
+        //Test
     }
 }

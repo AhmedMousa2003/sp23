@@ -48,4 +48,8 @@ public class ListExercises {
         }
         return num;
     }
+
+    public static void main(String[] args) {
+        // Test;
+    }
 }
