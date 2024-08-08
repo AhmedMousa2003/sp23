@@ -1,24 +1,22 @@
+/**
+ * Implementation of LinkeListDeque
+ * @autor Ahmed Mousa
+ */
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
-    Node <T> sentinel;
-    int size;
+    private Node <T> sentinel;
+    private int size;
     private class Node<T>{
-        T data;
+        private T data;
         Node<T> prev, nxt;
         public Node (T data, Node<T> prev, Node<T> nxt){
             this.data = data;
             this.prev = prev;
             this.nxt = nxt;
         }
-    }
-
-    public static void main(String[] args){
-        System.out.println("LinkedList");
-        Deque<Integer> lld = new LinkedListDeque<Integer>();
-        //lld.addFirst(1);
-        lld.addFirst(200);
-        lld.addLast(510);
     }
 
     public LinkedListDeque(){}{
@@ -31,48 +29,92 @@ public class LinkedListDeque<T> implements Deque<T> {
     public void addFirst(T x) {
         sentinel.nxt = new Node<T>(x, sentinel, sentinel.nxt);
         sentinel.nxt.nxt.prev = sentinel.nxt;
-        size++;
+        size += 1;
     }
 
     @Override
     public void addLast(T x) {
         sentinel.prev = new Node<T>(x, sentinel.prev, sentinel);
         sentinel.prev.prev.nxt = sentinel.prev;
-        size++;
+        size += 1;
     }
 
     @Override
     public List<T> toList() {
-        return List.of();
+        List<T> returnList = new ArrayList<T>();
+        Node<T> cur = sentinel.nxt;
+        while(cur != sentinel){
+            returnList.addLast(cur.data);
+            cur = cur.nxt;
+        }
+        return returnList;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return (size == 0);
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public T removeFirst() {
-        return null;
+        T returnValue =  sentinel.nxt.data;
+        sentinel.nxt.data = null;
+        sentinel.nxt = sentinel.nxt.nxt;
+        sentinel.nxt.prev = sentinel;
+        size -= 1;
+        return returnValue;
     }
 
     @Override
     public T removeLast() {
-        return null;
+        T returnValue =  sentinel.prev.data;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.nxt = sentinel;
+        size -= 1;
+        return returnValue;
     }
 
     @Override
     public T get(int index) {
-        return null;
+        if (index < 0 || index >= size){
+            return null;
+        }
+        T returnValue = null;
+        Node<T> cur = sentinel;
+        for (int i = 0; i <= index; i++){
+            cur = cur.nxt;
+        }
+        return cur.data;
     }
 
     @Override
     public T getRecursive(int index) {
-        return null;
+        if (index < 0 || index >= size){
+            return null;
+        }
+        return getRecursive(index, sentinel.nxt);
+    }
+    private T getRecursive(int index, Node<T> cur){
+        if (index == 0){
+            return cur.data;
+        }
+        return getRecursive(index - 1, cur.nxt);
+    }
+
+    public static void main(String[] args){
+        System.out.println("LinkedList");
+        Deque<Integer> lld = new LinkedListDeque<Integer>();
+        //lld.addFirst(1);
+        lld.addFirst(200);
+        lld.addLast(510);
+        lld.addFirst(300);
+        lld.addLast(520);
+        Integer val = lld.get(1);
+        System.out.println(val);
     }
 }
