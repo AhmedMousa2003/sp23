@@ -62,6 +62,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
+        if (isEmpty()){
+            return null;
+        }
         T returnValue =  sentinel.nxt.data;
         sentinel.nxt.data = null;
         sentinel.nxt = sentinel.nxt.nxt;
@@ -72,6 +75,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T removeLast() {
+        if (isEmpty()){
+            return null;
+        }
         T returnValue =  sentinel.prev.data;
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.nxt = sentinel;
