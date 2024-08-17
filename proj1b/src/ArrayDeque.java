@@ -64,11 +64,7 @@ public class ArrayDeque <T> implements Deque<T> {
 
     /** Move index x to the right and return its new value*/
     private int MoveRight(int x){
-        x += 1;
-        if (x == capacity){
-            x = 0;
-        }
-        return x;
+        return MoveRightBy(x, 1);
     }
 
     /** move index x to the left and return its new value */
@@ -185,7 +181,15 @@ public class ArrayDeque <T> implements Deque<T> {
         return capacity;
     }
 
+    public T front(){
+        return get(0);
+    }
+
+    public T back(){
+        return get(size - 1);
+    }
+
     public static void main(String[] args){
-        Deque<Integer> ad = new ArrayDeque<>();
+
     }
 }
