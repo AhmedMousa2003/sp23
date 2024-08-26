@@ -17,7 +17,7 @@ public class Puzzle {
     static final File ANSWER_FILE = new File("src/puzzle/answer.txt");
     static int guessThis = 0;
 
-    public static int puzzle() {
+        public static int puzzle() {
         int answer = loadAnswer(ANSWER_FILE);
 
         if (isCorrect(answer)) {
